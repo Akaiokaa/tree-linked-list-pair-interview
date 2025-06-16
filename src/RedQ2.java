@@ -40,8 +40,8 @@ public class RedQ2 {
             
         double average = (double) ListSum / ListCount;
 
-        int treeSum = CountTree(root);   // ✅ FIXED: this gets the sum
-        int treeCount = CountSum(root);  // ✅ FIXED: this gets the count
+        int treeSum = CountTree(root);  
+        int treeCount = CountSum(root);  
         double treeAvg = (double) treeSum / treeCount;
         
         if (average > treeAvg) {
