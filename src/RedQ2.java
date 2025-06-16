@@ -22,12 +22,49 @@ public class RedQ2 {
      * 
      * You can assume that the differences in averages will be large enough that
      * floating rounding error will not be an issue and that there will not be a tie.
-     * 
      * @param head the head of the linked list
      * @param root the root of the tree
      * @return "list" if the list has a bigger average, "tree" if the tree has a bigger average
      */
     public static String biggerAverage(ListNode head, TreeNode root) {
-        return null;
+        if(head == null) return null;
+
+        int ListCount = 0;
+        int ListSum = 0;
+        
+        while(head != null) {
+            ListSum += head.data;
+            ListCount++;
+            head = head.next; 
+        }
+            
+        double average = (double) ListSum / ListCount;
+
+        int treeSum = CountTree(root);   // ✅ FIXED: this gets the sum
+        int treeCount = CountSum(root);  // ✅ FIXED: this gets the count
+        double treeAvg = (double) treeSum / treeCount;
+        
+        if (average > treeAvg) {
+            return "list";
+        } else {
+            return "tree";
+        }
+
+    }
+
+    //Helper count
+    private static int CountTree(TreeNode root) {
+        if (root == null) return 0;
+        int LeftCount = CountTree(root.left);
+        int RightCount = CountTree(root.right);
+        return root.data + LeftCount + RightCount;
+    }
+
+    //helper sum 
+    private static int CountSum(TreeNode root) {
+        if (root == null) return 0; 
+        int LeftSum = CountSum(root.left);
+        int RightSum = CountSum(root.right);
+        return 1 + LeftSum + RightSum;
     }
 }
