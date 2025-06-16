@@ -1,8 +1,4 @@
 public class BlueQ2 {
-    public static void main(String[] args) {
-        ;
-        System.out.println(listRange(new ListNode(1, new ListNode(100, new ListNode(10000)))));
-    }
     /**
      * Returns which has a higher range: a given linked list or a given tree.
      * The range of a data structure is the difference between its highest
@@ -49,29 +45,42 @@ public class BlueQ2 {
          
 
          */
-        return null;
-    }
-    //
-    public static int listRange(ListNode root){
-        if(root == null) return 0;
-        int min = root.data;
-        int max = root.data;
-        // 1 2 3 
-        while(root != null && root.next != null){
-            if (max < root.next.data) {
-                max = root.next.data;
+        int min = head.data;
+        int max = head.data;
+        while(head != null){
+            if (head.data < min) {
+                min = head.data;
             }
-            if (max > root.next.data) {
-                min = root.next.data;
+            if (head.data > max) {
+                max = head.data;
             }
-            root = root.next;
+            head = head.next;
         }
-    
-
-        return max - min;
+        int listRange = max - min;
+        int treeMax = treeRangeMax(root);
+        int treeMin = treeRangeMin(root);
+        int treeRange = treeMax - treeMin;
+        return listRange > treeRange ? "list" : "tree";
     }
-    public static int treeRange(TreeNode root){
-        return 0;
+    public static int treeRangeMin(TreeNode root){
+        if(root == null) return Integer.MAX_VALUE;
+        int leftMin = treeRangeMin(root.left);
+        int rightMin = treeRangeMin(root.right);
+        int min = root.data;
+        min = Math.min(min, leftMin);
+        min = Math.min(min, rightMin);
+
+        return min;
+    }
+    public static int treeRangeMax(TreeNode root){
+        if(root == null) return Integer.MIN_VALUE;
+        int leftMax= treeRangeMax(root.left);
+        int rightMax= treeRangeMax(root.right);
+        int max = root.data;
+        max = Math.max(max, leftMax);
+        max = Math.max(max, rightMax);
+
+        return max;
     }
     
 
