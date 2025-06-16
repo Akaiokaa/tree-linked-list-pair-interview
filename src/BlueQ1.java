@@ -23,6 +23,30 @@ public class BlueQ1 {
      * @return the sum of the even leaf nodes
      */
     public static int evenLeafSum(TreeNode root) {
-        return -1;
+        int leafSumEven = 0;
+
+        if (root == null) return 0;
+
+        if (root.left == null && root.right == null && root.data % 2 == 0) {
+            leafSumEven += root.data;
+        }
+        leafSumEven += evenLeafSum(root.left);
+        leafSumEven += evenLeafSum(root.right);
+
+        /*
+
+         int varibaleevensum = 0;
+         if the root is null return 0;
+         
+         evenLEafSum(root.left)
+         evenLEafSum(root.right)
+
+         if root left and right is null we will return root.data
+         root.datga % 2 == 0;
+
+
+
+         */
+        return leafSumEven;
     }
 }
