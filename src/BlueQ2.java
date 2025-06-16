@@ -1,4 +1,8 @@
 public class BlueQ2 {
+    public static void main(String[] args) {
+        ;
+        System.out.println(listRange(new ListNode(1, new ListNode(100, new ListNode(10000)))));
+    }
     /**
      * Returns which has a higher range: a given linked list or a given tree.
      * The range of a data structure is the difference between its highest
@@ -32,8 +36,43 @@ public class BlueQ2 {
      * @return "list" if the list has a bigger range, "tree" otherwise
      */
     public static String biggerRange(ListNode head, TreeNode root) {
+        /*
+         int treeRange
+         int listRange
+
+         loop through the listnode
+          int min
+           if()
+          int max
+           if()
+           While
+         
+
+         */
         return null;
     }
+    //
+    public static int listRange(ListNode root){
+        if(root == null) return 0;
+        int min = root.data;
+        int max = root.data;
+        // 1 2 3 
+        while(root != null && root.next != null){
+            if (max < root.next.data) {
+                max = root.next.data;
+            }
+            if (max > root.next.data) {
+                min = root.next.data;
+            }
+            root = root.next;
+        }
+    
 
+        return max - min;
+    }
+    public static int treeRange(TreeNode root){
+        return 0;
+    }
+    
 
 }
